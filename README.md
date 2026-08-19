@@ -37,8 +37,6 @@ The system consists of three interconnected microgrids containing:
 
 ## Current Status
 
-✅ Original LINGO implementation completed
-
 🚧 Python redevelopment in progress
 
 ⬜ Data preprocessing
@@ -68,8 +66,6 @@ The system consists of three interconnected microgrids containing:
 docs/
 data/
 images/
-legacy-lingo/
-src/
 ```
 
 ---

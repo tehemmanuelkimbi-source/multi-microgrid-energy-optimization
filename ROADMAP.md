@@ -8,7 +8,7 @@
 
 ## Phase 2
 
-- [ ] Translate LINGO model to Python
+- [ ] Python model
 - [ ] Build optimization model
 - [ ] Validate results
 

@@ -2,81 +2,55 @@
 
 ## Overview
 
-This repository contains the redevelopment of a graduate-level optimization project completed as part of the MSc Energy Engineering program at the University of Genoa.
-
-The project investigates the optimal operation of interconnected microgrids integrating renewable energy sources, battery energy storage systems, electric vehicles, buildings with heat pumps, and grid interaction.
-
-The original implementation was developed in LINGO. This repository documents the migration to Python to improve reproducibility, extensibility, and visualization.
-
----
+This repository contains a reproducible Python redevelopment of a graduate
+energy-engineering optimisation project at the University of Genoa. The model
+optimises the 24-hour operation of three interconnected microgrids integrating
+renewables, stationary batteries, an EV, a heat pump, building thermal
+dynamics, fossil generation, and external-grid interaction.
 
 ## Objectives
 
-- Minimize operating costs
-- Minimize CO₂ emissions
-- Optimize battery charging and discharging
-- Schedule electric vehicle charging
-- Coordinate energy exchange between microgrids
-- Improve renewable energy utilization
-
----
-
-## System Description
-
-The system consists of three interconnected microgrids containing:
-
-- Photovoltaic generation
-- Wind generation
-- Battery Energy Storage Systems
-- Electric Vehicles (V2G)
-- Heat Pumps
-- Building thermal dynamics
-- Grid interaction
-
----
+- Minimise operating and carbon costs.
+- Minimise physical CO2 emissions.
+- Coordinate battery, EV, heat-pump, grid, and inter-microgrid flows.
+- Analyse cost-emissions and cost-comfort trade-offs.
 
 ## Current Status
 
-🚧 Python redevelopment in progress
-
-⬜ Data preprocessing
-
-⬜ Optimization model
-
-⬜ Results visualization
-
-⬜ Final technical report
-
----
-
-## Planned Improvements
-
-- Python implementation using Pyomo
-- Interactive visualization
-- Sensitivity analysis
-- Battery degradation modelling
-- Demand forecasting
-- AI-assisted optimization
-
----
+The 24-hour Python/PuLP model is implemented and verified. It includes a
+feasibility diagnosis, optimal dispatch, power-balance visualisations, a
+normalised cost-emissions Pareto front, and temperature- and emissions-weight
+sensitivity analyses.
 
 ## Repository Structure
 
 ```text
-docs/
-data/
-images/
+data/          # Course input workbook
+docs/          # Project brief and assumptions register
+images/        # Generated power-balance, Pareto, and sensitivity figures
+results/       # Exported Excel results workbook
+src/           # Reproducible Python/PuLP model
+legacy-lingo/  # Placeholder for the original LINGO implementation
 ```
 
----
+## Running the model
+
+From the `src` directory, install the dependencies listed in `pyproject.toml`
+and run:
+
+```bash
+uv run python main.py
+```
+
+The script reads `data/data_m.xlsx`, writes figures to `images/`, and prints
+the dispatch, Pareto, and sensitivity tables. The complete exported workbook
+is available in `results/`.
 
 ## Skills Demonstrated
 
-- Energy Systems Optimization
-- Smart Grids
-- Distributed Energy Resources
-- Battery Energy Storage Systems
-- Mathematical Modelling
-- Python
-- Multi-objective Optimization
-
+- Energy-systems optimisation
+- Smart grids and distributed energy resources
+- Battery storage and V2G scheduling
+- Building thermal modelling
+- Multi-objective optimisation and sensitivity analysis
+- Python, PuLP, and data visualisation

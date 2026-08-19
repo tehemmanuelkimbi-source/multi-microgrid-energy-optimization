@@ -1,0 +1,11 @@
+[project]
+name = "multi-microgrid-project"
+version = "0.1.0"
+requires-python = ">=3.14"
+dependencies = [
+    "matplotlib",
+    "numpy>=2.5.1",
+    "pandas>=3.0.5",
+    "pandas-stubs~=3.0.5",
+    "pulp>=3.3.2",
+]

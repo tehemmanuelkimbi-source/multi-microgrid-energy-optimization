@@ -8,12 +8,12 @@
 
 ## Phase 2
 
-- [ ] Python model
-- [ ] Build optimization model
-- [ ] Validate results
+- [x] Python model
+- [x] Build optimization model
+- [x] Validate results
 
 ## Phase 3
 
-- [ ] Generate figures
+- [x] Generate figures
 - [ ] Write technical report
-- [ ] Clean documentation
+- [x] Clean documentation

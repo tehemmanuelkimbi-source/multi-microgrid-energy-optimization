@@ -8,4 +8,6 @@ dependencies = [
     "pandas>=3.0.5",
     "pandas-stubs~=3.0.5",
     "pulp>=3.3.2",
+    "pyomo>=6.10.1",
+    "gurobipy>=13.0.2",
 ]

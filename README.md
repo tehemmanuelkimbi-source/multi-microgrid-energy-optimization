@@ -1,56 +1,44 @@
-# Multi-Microgrid Energy Optimization for Sustainable Energy Management
+# Multi-Microgrid Energy Optimisation
 
-## Overview
+This repository contains a reproducible 24-hour scheduling study for three interconnected microgrids.  The system includes renewable generation, stationary batteries, a fossil generator, an EV with V2G/G2V operation, a heat pump, building thermal dynamics, grid exchange, and two inter-microgrid lines.
 
-This repository contains a reproducible Python redevelopment of a graduate
-energy-engineering optimisation project at the University of Genoa. The model
-optimises the 24-hour operation of three interconnected microgrids integrating
-renewables, stationary batteries, an EV, a heat pump, building thermal
-dynamics, fossil generation, and external-grid interaction.
+## Solver implementations
 
-## Objectives
+| Script | Solver | Tracking formulation | Recommended use |
+|---|---|---|---|
+| `src/main.py` | PuLP + CBC | MILP-compatible absolute deviation, `sum(abs(Tb - Tset))` | Open-source/reproducible comparison model |
+| `src/main_pyomo.py` | Pyomo + Gurobi | Exact quadratic term, `sum((Tb - Tset)^2)` | Authoritative project results |
 
-- Minimise operating and carbon costs.
-- Minimise physical CO2 emissions.
-- Coordinate battery, EV, heat-pump, grid, and inter-microgrid flows.
-- Analyse cost-emissions and cost-comfort trade-offs.
+The models share the same network, data, operational constraints, diagnostic scenario, feasible-planning scenario, two project-defined Pareto curves, and sensitivity analyses.  They can return different hourly flows when multiple dispatches have the same optimal objective value.
 
-## Current Status
+## Project-defined Pareto analyses
 
-The 24-hour Python/PuLP model is implemented and verified. It includes a
-feasibility diagnosis, optimal dispatch, power-balance visualisations, a
-normalised cost-emissions Pareto front, and temperature- and emissions-weight
-sensitivity analyses.
+1. **Pareto 1:** minimise the trade-off between physical CO2 emissions and cost including energy, base carbon cost, and soft temperature tracking.
+2. **Pareto 2:** remove soft tracking, impose the 19--23 degC hard temperature bounds, and minimise the cost--emissions trade-off.
 
-## Repository Structure
+## Repository layout
 
 ```text
-data/          # Course input workbook
-docs/          # Project brief and assumptions register
-images/        # Generated power-balance, Pareto, and sensitivity figures
-results/       # Exported Excel results workbook
-src/           # Reproducible Python/PuLP model
-legacy-lingo/  # Placeholder for the original LINGO implementation
+data/                 Course input workbook
+docs/                 Project brief, assumptions, and documentation
+src/                  PuLP/CBC and Pyomo/Gurobi optimisation scripts
+outputs/pulp_cbc/     Current PuLP figures and Excel workbook
+outputs/pyomo_gurobi/ Current Pyomo figures and Excel workbook
+outputs/legacy_pulp/  Previously generated material retained for traceability
+legacy-lingo/         Reference-only legacy material; not used as model input
 ```
 
-## Running the model
+## Run
 
-From the `src` directory, install the dependencies listed in `pyproject.toml`
-and run:
+From `src/`:
 
 ```bash
 uv run python main.py
+uv run python main_pyomo.py
 ```
 
-The script reads `data/data_m.xlsx`, writes figures to `images/`, and prints
-the dispatch, Pareto, and sensitivity tables. The complete exported workbook
-is available in `results/`.
+The Pyomo version requires a working Gurobi licence. Both scripts read `data/data_m.xlsx` and write their results to their respective `outputs/` folder.
 
-## Skills Demonstrated
+## Model governance
 
-- Energy-systems optimisation
-- Smart grids and distributed energy resources
-- Battery storage and V2G scheduling
-- Building thermal modelling
-- Multi-objective optimisation and sensitivity analysis
-- Python, PuLP, and data visualisation
+All values not directly supplied by `data_m.xlsx` or the project brief are listed in [docs/assumption_register.md](docs/assumption_register.md). In particular, the virtual comfort cost and VoLL are scenario assumptions, not market tariffs.
